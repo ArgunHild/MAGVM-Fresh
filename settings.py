@@ -40,7 +40,7 @@ SESSION_CONFIGS = [
 # e.g. self.session.config['participation_fee']
 
 ROOMS = [
-    dict( name = 'Survey', display_name = 'Survey'),
+        dict(name='VCEEroom', display_name='VCEE Room'),
 ]
 
 

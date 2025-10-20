@@ -67,7 +67,7 @@ def creating_session(subsession):
 
             
     
-    #remove this code below. FOr now this is there to allow me to bypass comprehension
+    #TODO: remove this code below. FOr now this is there to allow me to bypass comprehension
     # for debugging purposes, remove this code below
     # for p in players:
     #     p.participant.Treatment = 'Sequential'

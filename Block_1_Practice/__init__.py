@@ -11,7 +11,7 @@ class C(BaseConstants):
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
     
-    Round_length = 120 
+    Round_length = 120
     Timer_text = "Time left to complete this round:" 
     
     # Game instruction path
