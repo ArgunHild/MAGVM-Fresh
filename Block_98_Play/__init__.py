@@ -243,7 +243,7 @@ class Game_1(MyBasePage):
     @staticmethod
     def js_vars(player): 
         
-        # player.participant.Final_bundle = "Emotion_2_Emotion_2_Emotion_2"
+        # player.participant.Final_bundle = "Quiz_2_Quiz_2"
         
         returnable = dict(field_name = 'Game_1_performance',
                           trial='trial',)
@@ -259,8 +259,7 @@ class Game_1(MyBasePage):
         
     @staticmethod
     def vars_for_template(player: Player):
-        
-        # player.participant.Final_bundle = "Emotion_2_Emotion_2_Emotion_2"
+        # player.participant.Final_bundle = "Quiz_2_Quiz_2"
 
 
         
