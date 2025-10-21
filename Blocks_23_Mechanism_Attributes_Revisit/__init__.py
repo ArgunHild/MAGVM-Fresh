@@ -857,7 +857,7 @@ class Attributes_tasks_Dimension_1_cardinality(MyBasePage):
         variables['DimensionAtHand'] = "Cognitive Ease"
         variables['DimensionText'] = C.CognitiveEase_text_2
         
-        # #remove the next 2 lines (DEBUG ONLY)
+        #  remove the next 2 lines (DEBUG ONLY)
         # if not ranking_order:
         #     ranking_order = json.dumps(random.sample(["SpotTheDifference", "Quiz", "MathMemory", "EmotionRecognition"], 4))
     
@@ -905,7 +905,7 @@ class Attributes_tasks_Dimension_2_cardinality(MyBasePage):
         
         variables['DimensionAtHand'] = "Engagement"
         variables['DimensionText'] = C.Engagement_text_2
-        #  remove the next 2 lines (DEBUG ONLY)
+        #   remove the next 2 lines (DEBUG ONLY)
         # if not ranking_order:
         #     ranking_order = json.dumps(random.sample(["SpotTheDifference", "Quiz", "MathMemory", "EmotionRecognition"], 4))
     
@@ -1002,7 +1002,7 @@ class Attributes_tasks_Dimension_4_cardinality(MyBasePage):
         
         variables['DimensionAtHand'] = "Time Efficiency"
         variables['DimensionText'] = C.TimeEfficiency_text_2
-        #   remove the next 2 lines (DEBUG ONLY)
+        # remove the next 2 lines (DEBUG ONLY)
         # if not ranking_order:
         #     ranking_order = json.dumps(random.sample(["SpotTheDifference", "Quiz", "MathMemory", "EmotionRecognition"], 4))
     
@@ -1022,7 +1022,7 @@ class Attributes_variety(MyBasePage):
         return variables
     
     #/ debug remove these
-    # 'this is for debug  delete the following lines'
+    # this is for debug  delete the following lines'
     # @staticmethod
     # def before_next_page(player: Player, timeout_happened):
     #     for dimension_field in ['cardinality_Dimension_1', 'cardinality_Dimension_2', 'cardinality_Dimension_3', 'cardinality_Dimension_4']:
@@ -1513,6 +1513,7 @@ class Revisit_explanation(MyBasePage):
         This is for debug only!
         '''
         'setting random bundles for the player'
+         
         # remove these codes, replace with pass (debug only)
         # for rank in range(1, 6):
         #     for difficulty in ['Easy', 'Medium', 'Difficult']:
@@ -1524,7 +1525,7 @@ class Revisit_explanation(MyBasePage):
         #             print(f"DEBUG: Assigned random choice {random_choice} for {choice_field} for player {player.id_in_subsession}")
         
         
-        # calculate_task_scores(player)
+        calculate_task_scores(player)
         for rank in range(1, 6): 
             for difficulty in ['Easy', 'Medium', 'Difficult']:
                 calculate_bundle_scores(player, difficulty, rank)
