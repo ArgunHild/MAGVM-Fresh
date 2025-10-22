@@ -25,7 +25,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Assign MechanismHandler to the button click event
-    document.getElementById('NextButton').addEventListener('click', MechanismHandler);
+    // Assign MechanismHandler to the button click event with safeguard
+    document.getElementById('NextButton').addEventListener('click', function MechanismHandler() {
+        // Prevent multiple triggers
+        if (document.getElementById('popupModal')) {
+            console.warn('Popup already open — ignoring duplicate click.');
+            return;
+        }
+
+        console.log('Mechanism selected:', js_vars.Mechanism);
+        if (js_vars.Mechanism === 'Sequential') {
+            Sequential();
+        } else if (js_vars.Mechanism === 'Binary') {
+            Binary();
+        }
+
+        // Disable button to stop re-clicks
+        this.disabled = true;
+    });
 });
 
 function Sequential() {

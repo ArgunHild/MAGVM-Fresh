@@ -3,6 +3,9 @@ import random
 import json
 import ast
 
+
+DEBUG = False
+
 doc = '''
 
 '''
@@ -119,7 +122,6 @@ def return_available_bundles(player, rank, difficulty, save_to_player=False, ret
         - algorithm treats him as player i-5, so he gets menu #ID_in_Group - 5
     '''
     # Extract unavailable bundles dynamically
-    # print('========DEBUGGING========')
     next_guy = player_id_group  
     next_guy_rank = rank -2
     for x in range(1, rank):  # x = 1 to rank-1 e.g, if rank=3, x = 1,2; rank = 5, x = 1,2,3,4
@@ -310,7 +312,7 @@ def calculate_bundle_scores(player, difficulty, rank):
     # Store the computed scores in the player model
     setattr(player, f"Available_bundles_{difficulty}_rank{rank}_score", json.dumps(Available_bundles_scores))
 
-    return Available_bundles_scores  # Optional return for debugging
+    return Available_bundles_scores  
 
         
     
@@ -794,11 +796,11 @@ class Attributes_rank(MyBasePage):
             field_name = 'ranking_order',
         )
         
-    # DEBUGGING delete this
-    # @staticmethod   
-    # def before_next_page(player: Player, timeout_happened):
-    #     #delete these to remove the bug.
-    #     player.ranking_order = json.dumps(["Cognitive Ease", "Engagement", "Confidence", "Time Efficiency"])
+    if DEBUG:
+        @staticmethod   
+        def before_next_page(player: Player, timeout_happened):
+            #delete these to remove the bug.
+            player.ranking_order = json.dumps(["Cognitive Ease", "Engagement", "Confidence", "Time Efficiency"])
     
 class Attributes_rank_cardinality(MyBasePage):
     extra_fields = ['cardinality_Dimension_1', 'cardinality_Dimension_2', 
@@ -857,9 +859,9 @@ class Attributes_tasks_Dimension_1_cardinality(MyBasePage):
         variables['DimensionAtHand'] = "Cognitive Ease"
         variables['DimensionText'] = C.CognitiveEase_text_2
         
-        #  remove the next 2 lines (DEBUG ONLY)
-        # if not ranking_order:
-        #     ranking_order = json.dumps(random.sample(["SpotTheDifference", "Quiz", "MathMemory", "EmotionRecognition"], 4))
+        if DEBUG:
+            if not ranking_order:
+                ranking_order = json.dumps(random.sample(["SpotTheDifference", "Quiz", "MathMemory", "EmotionRecognition"], 4))
     
         variables['ranked_items'] = json.loads(ranking_order) 
         return variables
@@ -905,9 +907,10 @@ class Attributes_tasks_Dimension_2_cardinality(MyBasePage):
         
         variables['DimensionAtHand'] = "Engagement"
         variables['DimensionText'] = C.Engagement_text_2
-        #   remove the next 2 lines (DEBUG ONLY)
-        # if not ranking_order:
-        #     ranking_order = json.dumps(random.sample(["SpotTheDifference", "Quiz", "MathMemory", "EmotionRecognition"], 4))
+        
+        if DEBUG:
+            if not ranking_order:
+                ranking_order = json.dumps(random.sample(["SpotTheDifference", "Quiz", "MathMemory", "EmotionRecognition"], 4))
     
         variables['ranked_items'] = json.loads(ranking_order)
         return variables
@@ -954,9 +957,9 @@ class Attributes_tasks_Dimension_3_cardinality(MyBasePage):
         variables['DimensionAtHand'] = "Confidence"
         variables['DimensionText'] = C.Confidence_text_2
         
-        #  remove the next 2 lines (DEBUG ONLY)
-        # if not ranking_order:
-        #     ranking_order = json.dumps(random.sample(["SpotTheDifference", "Quiz", "MathMemory", "EmotionRecognition"], 4))
+        if DEBUG:
+            if not ranking_order:
+                ranking_order = json.dumps(random.sample(["SpotTheDifference", "Quiz", "MathMemory", "EmotionRecognition"], 4))
     
         variables['ranked_items'] = json.loads(ranking_order)
         return variables
@@ -1002,9 +1005,10 @@ class Attributes_tasks_Dimension_4_cardinality(MyBasePage):
         
         variables['DimensionAtHand'] = "Time Efficiency"
         variables['DimensionText'] = C.TimeEfficiency_text_2
-        # remove the next 2 lines (DEBUG ONLY)
-        # if not ranking_order:
-        #     ranking_order = json.dumps(random.sample(["SpotTheDifference", "Quiz", "MathMemory", "EmotionRecognition"], 4))
+        
+        if DEBUG:
+            if not ranking_order:
+                ranking_order = json.dumps(random.sample(["SpotTheDifference", "Quiz", "MathMemory", "EmotionRecognition"], 4))
     
         variables['ranked_items'] = json.loads(ranking_order)
         return variables
@@ -1021,20 +1025,19 @@ class Attributes_variety(MyBasePage):
             
         return variables
     
-    #/ debug remove these
-    # this is for debug  delete the following lines'
-    # @staticmethod
-    # def before_next_page(player: Player, timeout_happened):
-    #     for dimension_field in ['cardinality_Dimension_1', 'cardinality_Dimension_2', 'cardinality_Dimension_3', 'cardinality_Dimension_4']:
-    #         if not player.field_maybe_none(dimension_field):
-    #             setattr(player, dimension_field, random.randint(1, 10))
-                
-    #     for attribute in ['cardinality_Dimension_CognitiveEase_Quiz', 'cardinality_Dimension_CognitiveEase_SpotTheDifference', 'cardinality_Dimension_CognitiveEase_MathMemory', 'cardinality_Dimension_CognitiveEase_EmotionRecognition',
-    #               'cardinality_Dimension_Engagement_Quiz', 'cardinality_Dimension_Engagement_SpotTheDifference', 'cardinality_Dimension_Engagement_MathMemory', 'cardinality_Dimension_Engagement_EmotionRecognition',
-    #               'cardinality_Dimension_Confidence_Quiz', 'cardinality_Dimension_Confidence_SpotTheDifference', 'cardinality_Dimension_Confidence_MathMemory', 'cardinality_Dimension_Confidence_EmotionRecognition',
-    #               'cardinality_Dimension_TimeEfficiency_Quiz', 'cardinality_Dimension_TimeEfficiency_SpotTheDifference', 'cardinality_Dimension_TimeEfficiency_MathMemory', 'cardinality_Dimension_TimeEfficiency_EmotionRecognition']:
-    #         if not player.field_maybe_none(attribute):
-    #             setattr(player, attribute, random.randint(1, 10))
+    if DEBUG:
+        @staticmethod
+        def before_next_page(player: Player, timeout_happened):
+            for dimension_field in ['cardinality_Dimension_1', 'cardinality_Dimension_2', 'cardinality_Dimension_3', 'cardinality_Dimension_4']:
+                if not player.field_maybe_none(dimension_field):
+                    setattr(player, dimension_field, random.randint(1, 10))
+                    
+            for attribute in ['cardinality_Dimension_CognitiveEase_Quiz', 'cardinality_Dimension_CognitiveEase_SpotTheDifference', 'cardinality_Dimension_CognitiveEase_MathMemory', 'cardinality_Dimension_CognitiveEase_EmotionRecognition',
+                    'cardinality_Dimension_Engagement_Quiz', 'cardinality_Dimension_Engagement_SpotTheDifference', 'cardinality_Dimension_Engagement_MathMemory', 'cardinality_Dimension_Engagement_EmotionRecognition',
+                    'cardinality_Dimension_Confidence_Quiz', 'cardinality_Dimension_Confidence_SpotTheDifference', 'cardinality_Dimension_Confidence_MathMemory', 'cardinality_Dimension_Confidence_EmotionRecognition',
+                    'cardinality_Dimension_TimeEfficiency_Quiz', 'cardinality_Dimension_TimeEfficiency_SpotTheDifference', 'cardinality_Dimension_TimeEfficiency_MathMemory', 'cardinality_Dimension_TimeEfficiency_EmotionRecognition']:
+                if not player.field_maybe_none(attribute):
+                    setattr(player, attribute, random.randint(1, 10))
 
 
 #%% Comprehension questions
@@ -1514,15 +1517,15 @@ class Revisit_explanation(MyBasePage):
         '''
         'setting random bundles for the player'
          
-        # remove these codes, replace with pass (debug only)
-        # for rank in range(1, 6):
-        #     for difficulty in ['Easy', 'Medium', 'Difficult']:
-        #         choice_field = f"{difficulty}_rank{rank}_choice"
-        #         if not getattr(player, choice_field):
-        #             available_bundles = return_available_bundles(player, rank, difficulty)[0]
-        #             random_choice = random.choice(list(available_bundles.keys()))
-        #             setattr(player, choice_field, random_choice)
-        #             print(f"DEBUG: Assigned random choice {random_choice} for {choice_field} for player {player.id_in_subsession}")
+        if DEBUG:
+            for rank in range(1, 6):
+                for difficulty in ['Easy', 'Medium', 'Difficult']:
+                    choice_field = f"{difficulty}_rank{rank}_choice"
+                    if not getattr(player, choice_field):
+                        available_bundles = return_available_bundles(player, rank, difficulty)[0]
+                        random_choice = random.choice(list(available_bundles.keys()))
+                        setattr(player, choice_field, random_choice)
+                        print(f"DEBUG: Assigned random choice {random_choice} for {choice_field} for player {player.id_in_subsession}")
         
         
         calculate_task_scores(player)
