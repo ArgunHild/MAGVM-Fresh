@@ -122,20 +122,18 @@ class Player(BasePlayer):
                                 choices=['Male', 'Female', 'Other/Prefer not to say'], widget=widgets.RadioSelect)
     education = models.StringField(blank=False, 
                                 label = 'Education level',
-                                   choices=['Haven’t graduated high school','GED','High school graduate','Bachelors','Masters','Professional degree (JD, MD, MBA)','Doctorate', 'Other'], widget=widgets.RadioSelect) 
+                                   choices=['Haven’t graduated high school','High school graduate','Bachelors','Masters','Ph.D. (Doctorate)', 'Other'], widget=widgets.RadioSelect) 
     # education = models.StringField(label = 'Education level',
     #                                choices=['High school or lower','Bachelors degree','Masters degree','PhD','Other'], widget=widgets.RadioSelect) 
     
     employment = models.StringField(blank=False, 
                                 label='Employment status',
                                     choices=['Employed full-time', 'Employed part-time', 'Self-employed', 'Out of work, or seeking work',
-                                             'Student', 'Out of labor force (e.g. retired or parent raising one or more children)'], widget=widgets.RadioSelect)
+                                             ], widget=widgets.RadioSelect)
     
-    income = models.StringField(blank=False, 
-                                label='Approximately, what was your <strong>total household income</strong> in the last year, before taxes?',
-                            choices=['$0-$10.000', '$10.000-$20.000','$20.000-$30.000','$30.000-$40.000','$40.000-$50.000','$50.000-$60.000',
-                                     '$50.000-$75.000', '$75.000-$100.000', '$100.000-$150.000', '$150.000-$200.000', '$200.000+', 'Prefer not to answer',
-                                     ],)
+    studies = models.StringField(blank=True, 
+                                label='(If student) Towards which degree are you studying?',
+                            )
     
     
     
@@ -568,7 +566,7 @@ class Results(MyBasePage):
             f'<li>Practice-stage bonus: {player.participant.Bonus_1/100} €</li>'
             f'<li>Bundle bonus: {player.Bonus_final_bundle} €</li>'
             f'</ol>'
-            f'<strong>Total payment: {total_pay} €</strong>'
+            f'<strong>Total payment: {total_pay} €</strong> (rounded up to nearest 0.5 €)'
         )
 
         return v
@@ -660,7 +658,7 @@ class Results(MyBasePage):
     
     
 class Demographics(MyBasePage):
-    extra_fields = ['age', 'gender', 'education', 'employment', 'income'] 
+    extra_fields = ['age', 'gender', 'education', 'studies', 'employment'] 
     form_fields = MyBasePage.form_fields + extra_fields
 
         
