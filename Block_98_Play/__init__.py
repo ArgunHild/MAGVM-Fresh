@@ -276,7 +276,7 @@ class Game_1(MyBasePage):
         variables['Difficulty']      = int(bundle[num + 1])  # true level 1-3
         variables['Task_instructions'] = getattr(C, f'{task_code}_instructions')
         
-        task_code = player.participant.Final_bundle.split('_')[0]  # "Spot" from "Spot_2"
+        task_code = player.participant.Final_bundle.split('_')[0].strip('"')
         if task_code == 'Spot':
             GameTemplate = getattr(C, f'{task_code}_template_3')
         else:
