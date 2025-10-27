@@ -4,7 +4,7 @@ import json
 import ast
 
 
-DEBUG = True
+DEBUG = False
 
 doc = '''
 
