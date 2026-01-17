@@ -54,7 +54,7 @@ class C(BaseConstants):
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
     
-    Round_length = 120 
+    Round_length = 120
     Timer_text = "Time left to complete this round:" 
     
     Instructions_general_path = "_templates/global/Instructions.html"
@@ -241,7 +241,7 @@ class Game_1(MyBasePage):
     @staticmethod
     def js_vars(player): 
         
-        # player.participant.Final_bundle = "Quiz_2_Quiz_2"
+        # player.participant.Final_bundle = "Spot_1"
         
         returnable = dict(field_name = 'Game_1_performance',
                           trial='trial',)
@@ -257,7 +257,8 @@ class Game_1(MyBasePage):
         
     @staticmethod
     def vars_for_template(player: Player):
-        # player.participant.Final_bundle = "Quiz_2_Quiz_2"
+
+        # player.participant.Final_bundle = "Spot_1"
 
 
         
@@ -368,9 +369,12 @@ class Game_2(MyBasePage):
         bundle_list = Final_bundle.split('_') 
         
         if bundle_list[2] == 'Spot':
-            GameTemplate = getattr(C, f'{task_code}_template_4')
+            if bundle_list[0] == 'Spot':
+                GameTemplate = getattr(C, f'{task_code}_template_4')
+            else:
+                GameTemplate = getattr(C, f'{task_code}_template_3')
         else:
-            GameTemplate = getattr(C, f'{task_code}_template')    
+            GameTemplate = getattr(C, f'{task_code}_template')   
         
         variables['GameTemplate']      = GameTemplate
 
@@ -456,11 +460,16 @@ class Game_3(MyBasePage):
         
         Final_bundle = player.participant.Final_bundle
         bundle_list = Final_bundle.split('_') 
-        
+            
         if bundle_list[4] == 'Spot':
-            GameTemplate = getattr(C, f'{task_code}_template_4')
+            # Check if Spot appeared in Game_1 or Game_2
+            if 'Spot' in (bundle_list[0], bundle_list[2]):
+                GameTemplate = getattr(C, f'{task_code}_template_4')
+            else:
+                GameTemplate = getattr(C, f'{task_code}_template_3')
         else:
-            GameTemplate = getattr(C, f'{task_code}_template')    
+            GameTemplate = getattr(C, f'{task_code}_template') 
+
         
         variables['GameTemplate']      = GameTemplate
 
