@@ -242,6 +242,7 @@ class Game_1(MyBasePage):
     def js_vars(player): 
         
         # player.participant.Final_bundle = "Spot_2_Spot_1"
+        print(player.participant.Final_bundle)
         
         returnable = dict(field_name = 'Game_1_performance',
                           trial='trial',)
