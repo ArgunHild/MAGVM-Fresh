@@ -102,6 +102,7 @@ const actual_differences_farm = [
     ];
 
     const trial = js_vars.trial;
+    console.log(`Current trial: ${trial}`);
     var actual_differences = actual_differences_grannies;
     if (trial == 'trial2') {
         var actual_differences = actual_differences_elephant;
