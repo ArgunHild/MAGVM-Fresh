@@ -54,7 +54,7 @@ class C(BaseConstants):
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
     
-    Round_length = 120
+    Round_length = 120 
     Timer_text = "Time left to complete this round:" 
     
     Instructions_general_path = "_templates/global/Instructions.html"
@@ -236,21 +236,22 @@ class Game_1(MyBasePage):
     extra_fields = ['Game_1_performance'] 
     form_fields = MyBasePage.form_fields + extra_fields
     
-    timeout_seconds, timer_text = C.Round_length, C.Timer_text
-
+    timeout_seconds, timer_text = C.Round_length, C.Timer_text   
     @staticmethod
     def js_vars(player): 
+        
+        Final_bundle = player.participant.Final_bundle.strip('"')
         
         # player.participant.Final_bundle = "Spot_2_Spot_1"
         # print(player.participant.Final_bundle)
         
         returnable = dict(field_name = 'Game_1_performance',
                           trial='trial',)
-        if player.participant.Final_bundle.startswith('Quiz'):
+        if Final_bundle.startswith('Quiz'):
             returnable['trial'] = 'trial3'
-        elif player.participant.Final_bundle.startswith('Spot'):
+        elif Final_bundle.startswith('Spot'):
             returnable['trial'] = 'trial3'
-        elif player.participant.Final_bundle.startswith('Emotion'):
+        elif Final_bundle.startswith('Emotion'):
             returnable['trial'] = 'trial3'
         else:
             returnable['trial'] = 'trial'
@@ -331,7 +332,8 @@ class Game_2(MyBasePage):
         
         returnable = dict(field_name = 'Game_2_performance',
                           trial='trial',)
-        Final_bundle = player.participant.Final_bundle
+        Final_bundle = player.participant.Final_bundle.strip('"')
+
         bundle_list = Final_bundle.split('_') 
         
         if bundle_list[2] == 'Quiz':
@@ -366,7 +368,7 @@ class Game_2(MyBasePage):
         variables['Difficulty']      = int(bundle[num + 1])   # true level (1-3)
         variables['Task_instructions'] = getattr(C, f'{task_code}_instructions')
         
-        Final_bundle = player.participant.Final_bundle
+        Final_bundle = player.participant.Final_bundle.strip('"')
         bundle_list = Final_bundle.split('_') 
         
         if bundle_list[2] == 'Spot':
@@ -423,7 +425,8 @@ class Game_3(MyBasePage):
     def js_vars(player): 
         
         returnable = dict(field_name = 'Game_3_performance',)
-        Final_bundle = player.participant.Final_bundle
+        Final_bundle = player.participant.Final_bundle.strip('"')
+
         bundle_list = Final_bundle.split('_') 
         
         if bundle_list[4] == 'Quiz':
@@ -459,13 +462,14 @@ class Game_3(MyBasePage):
         variables['Difficulty']      = int(bundle[num + 1])   # true level (1-3)
         variables['Task_instructions'] = getattr(C, f'{task_code}_instructions')
         
-        Final_bundle = player.participant.Final_bundle
+        Final_bundle = player.participant.Final_bundle.strip('"')
         bundle_list = Final_bundle.split('_') 
-            
+        
         if bundle_list[4] == 'Spot':
             # Check if Spot appeared in Game_1 or Game_2
             if 'Spot' in (bundle_list[0], bundle_list[2]):
                 GameTemplate = getattr(C, f'{task_code}_template_4')
+                print('DEBUG: Using Spot template 4')
             else:
                 GameTemplate = getattr(C, f'{task_code}_template_3')
         else:
