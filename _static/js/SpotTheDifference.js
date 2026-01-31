@@ -270,8 +270,8 @@ function drawDifferencesOnBothSides() {
         redrawCanvas();
 
         // DEBUG: show actual differences on both images
-        //  delete this or comment (shows the true answers)
-        // drawDifferencesOnBothSides();
+        // TODO: delete this or comment (shows the true answers)
+        drawDifferencesOnBothSides();
     };
 
     if (img.complete && img.naturalWidth) {
